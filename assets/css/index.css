@@ -1,138 +1,427 @@
-body {
-  margin: 0px;
-}
-main {
+#grid-main {
   display: grid;
   height: 100vh;
-  grid-template-areas: 
-    "header"
-    "left"
-    "content"
-    "right"
-    "footer";
-}
+  font-size: 2.2rem;
+  grid-template-columns:
+    [one-start] 1fr
+    [one-end two-start] 1fr
+    [two-end three-start] 1fr
+    [three-end four-start] 1fr
+    [four-end five-start] 1fr
+    [five-end six-start] 1fr
+    [six-end seven-start] 1fr
+    [seven-end eight-start] 1fr
+    [eight-end nine-start] 1fr
+    [nine-end];
 
-
-  /*grid-template-columns: 
-    [sideleft-start] 1fr
-    [sideleft-end content-start] 2fr
-    [content-end sideright-start] 1fr
-    [sideright-end];
-
-  grid-template-rows:
-    [header-start] 1fr
-    [header-end content-start] 2fr
-    [footer-start] 1fr
+  grid-template-rows: 
+    [header-start] 3fr
+    [header-end middle-start] 3fr
+    [middle-end footer-start] 3fr
     [footer-end];
-}*/
-
-@media (min-width: 500px) {
-  main {
-    grid-template-areas:
-      "header header header"
-      "left content right"
-      "footer footer footer";
-      grid-template-columns: 2fr 2fr 2fr;
-      grid-template-rows: 3fr 3fr 3fr;
-  }
 }
 
-header {
-  grid-area: header;
-  background-image: url(/assets/images/tv.svg);
-  min-width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;  
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 4em;
-  font-weight: bolder;
-  color: rgb(102, 102, 102);
-
-}
-aside-left:first-of-type {
-  grid-area: left;
-  min-width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  background-image: url(/assets/images/Coffee\ Beans.jpg);
-  font-family: 'Lato', sans-serif;
-  font-size: 4em;
-  font-weight: bolder;
-  color: bisque;
-}
-
-aside-right:last-of-type {
-  grid-area: right;
-  min-width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  background-image: url(/assets/images/grass.jpg);
-  font-family: 'Shadows Into Light Two', cursive;
-  font-size: 4em;
-  font-weight: bolder;
-  color: black;
-}
-
-article {
-  grid-area: content;
-  min-width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  background-color: rgb(204, 204, 204);
-  background-image: url(/assets/images/cake.jpg);
-  font-family: 'Aldrich', sans-serif;
-  font-size: 4em;
-  font-weight: bolder;
-  color: rgb(2, 119, 158);
-}
-
-footer {
-  grid-area: footer;
-  min-width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  background-color: black;
-}
 div {
-  color: white;
-  border: 1px solid white;
-  border-radius: 5px;
-  margin: 1rem;
-  text-shadow: 0 0 5px white;
-  padding: 1rem 1rem;
-  font-family: 'Monoton', cursive;
-  font-size: 4em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/*.playing {
-  transform:scale(1, 1);
-  border-color: rgb(102, 102, 102);
-  box-shadow: 0 0 10px rgb(204,204,204);
-}*/
-/*kbd {
-  display: block;
-  font-size: 30px;
-}*/
-/*.key {
+/*FLIP-BOX*/
+.flip-grid {
+  background-color: transparent;
+  perspective: 1000px;
+  border: 1px solid white;
+  width: 100%;
+  height: 100%;
+}
+
+/*FLIP-BOX-INNER*/
+
+.flip-grid-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/*FLIP-BOX-HOVER*/
+
+.flip-grid:hover .flip-grid-inner {
+  transform: rotateY(180deg);
+}
+
+/*FIRST BOX*/
+
+.flip-grid-front-a, .flip-grid-back-a {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-grid-front-a {
+  width: 100%;
+  height: 100%;
+  grid-column: one-start / one-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(102, 102, 102);
+  background-color: rgb(102, 102, 102);
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.flip-grid-back-a {
+  width: 100%;
+  height: 100%;
+  grid-column: one-start / one-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(211, 25, 150);
+  background-color: rgb(211, 25, 150);
+  color: white;
+  font-family: 'Chakra Petch', sans-serif;
+  transform: rotateY(180deg);
+}
+
+/*SECOND BOX*/
+
+.flip-grid-front-b, .flip-grid-back-b {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-grid-front-b {
+  width: 100%;
+  height: 100%;
+  grid-column: two-start / two-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(204, 204, 204);
+  background-color: rgb(204, 204, 204);
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.flip-grid-back-b {
+  width: 100%;
+  height: 100%;
+  grid-column: two-start / two-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(22, 147, 165);
+  background-color: rgb(22, 147, 165);
+  color: white;
+  font-family: 'Chakra Petch', sans-serif;
+  transform: rotateY(180deg);
+}
+
+/*THIRD BOX*/
+
+.flip-grid-front-c, .flip-grid-back-c {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-grid-front-c {
+  width: 100%;
+  height: 100%;
+  grid-column: three-start / three-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(255, 255, 0);
+  background-color: rgb(255, 255, 0);
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.flip-grid-back-c {
+  width: 100%;
+  height: 100%;
+  grid-column: three-start / three-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(173, 216, 199);
+  background-color: rgb(173, 216, 199);
+  color: white;
+  font-family: 'Chakra Petch', sans-serif;
+  transform: rotateY(180deg);
+}
+
+/*FOURTH BOX*/
+
+.flip-grid-front-d, .flip-grid-back-d {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-grid-front-d {
+  width: 100%;
+  height: 100%;
+  grid-column: four-start / four-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(105, 210, 231);
+  background-color: rgb(105, 210, 231);
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.flip-grid-back-d {
+  width: 100%;
+  height: 100%;
+  grid-column: four-start / four-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(254, 67, 101);
+  background-color: rgb(254, 67, 101);
+  font-family: 'Chakra Petch', sans-serif;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+/*FIFTH BOX*/
+
+.flip-grid-front-e, .flip-grid-back-e {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-grid-front-e {
+  width: 100%;
+  height: 100%;
+  grid-column: five-start / five-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(127, 175, 27);
+  background-color: rgb(127, 175, 27);
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.flip-grid-back-e {
+  width: 100%;
+  height: 100%;
+  grid-column: five-start / five-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(15, 10, 6);
+  background-color: rgb(15, 10, 6);
+  color: white;
+  font-family: 'Chakra Petch', sans-serif;
+  transform: rotateY(180deg);
+}
+
+/*SIXTH BOX*/
+
+.flip-grid-front-f, .flip-grid-back-f {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-grid-front-f {
+  width: 100%;
+  height: 100%;
+  grid-column: six-start / six-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(211, 25, 150);
+  background-color: rgb(211, 25, 150);
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.flip-grid-back-f {
+  width: 100%;
+  height: 100%;
+  grid-column: six-start / six-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(63, 184, 175);
+  background-color: rgb(63, 184, 175);
+  color: white;
+  font-family: 'Chakra Petch', sans-serif;
+  transform: rotateY(180deg);
+}
+
+/*SEVENTH BOX*/
+
+.flip-grid-front-g, .flip-grid-back-g {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-grid-front-g {
+  width: 100%;
+  height: 100%;
+  grid-column: seven-start / seven-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(231, 53, 37);
+  background-color: rgb(231, 53, 37);
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.flip-grid-back-g {
+  width: 100%;
+  height: 100%;
+  grid-column: seven-start / seven-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(195, 255, 104);
+  background-color: rgb(195, 255, 104);
+  color: white;
+  font-family: 'Chakra Petch', sans-serif;
+  transform: rotateY(180deg);
+}
+
+/*EIGHTH BOX*/
+
+.flip-grid-front-h, .flip-grid-back-h {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-grid-front-h {
+  width: 100%;
+  height: 100%;
+  grid-column: eight-start / eight-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(16, 127, 201);
+  background-color: rgb(16, 127, 201);
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.flip-grid-back-h {
+  width: 100%;
+  height: 100%;
+  grid-column: eight-start / eight-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(250, 201, 220);
+  background-color: rgb(250, 201, 220);
+  font-family: 'Chakra Petch', sans-serif;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+/*NINETH BOX*/
+
+.flip-grid-front-i, .flip-grid-back-i {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-grid-front-i {
+  width: 100%;
+  height: 100%;
+  grid-column: nine-start / nine-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(102, 102, 102);
+  background-color: rgb(102, 102, 102);
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.flip-grid-back-i {
+  width: 100%;
+  height: 100%;
+  grid-column: nine-start / nine-end;
+  grid-row: header-start / header-end;
+  border: 1px solid rgb(255, 204, 153);
+  background-color: rgb(255, 204, 153);
+  color: white;
+  font-family: 'Chakra Petch', sans-serif;
+  transform: rotateY(180deg);
+}
+
+#grid-smell {
+  display: grid;
+  height: 100%;
+  grid-column: one-start / three-end;
+  grid-row: middle-start / middle-end;
+  font-family: 'Merienda', cursive;
+  background-image: url(/assets/images/Coffee\ Beans.jpg);
+  color: rgb(255, 204, 153);
+  font-size: 4rem;
+}
+
+#grid-taste {
+  display: grid;
+  height: 100%;
+  grid-column: four-start / six-end;
+  grid-row: middle-start / middle-end;
+  font-family: 'Josefin Sans', sans-serif;
+  background-image: url(/assets/images/cake.jpg);
+  color: rgb(16, 127, 201);
+  font-size: 4rem;
+}
+
+#grid-touch {
+  display: flex;
+  height: 100%;
+  grid-column: seven-start / nine-end;
+  grid-row: middle-start / middle-end;
+  font-family: 'Shadows Into Light Two', cursive;
+  background-image: url(/assets/images/grass.jpg);
+  color: rgb(15, 10, 6);
+  font-size: 4rem;
+}
+
+#grid-hear {
+  display: flex;
+  height: 100%;
+  grid-column: one-start / nine-end;
+  grid-row: footer-start / footer-end;
+  color: white;
+  background-color: black;
+  font-family: 'Fascinate Inline', cursive;
+  border: 1px solid black;
+}
+
+.grid-hear-inner {
+  padding-left: 1rem;
+  padding-right: 1rem;
   border: 1px solid white;
   border-radius: 5px;
   margin: 1rem;
-  font-size: 1.5rem;
-  padding: 1rem .5rem;
-  transition:all 0.07s;
-  width: 100px;
-  text-align: center;
-  text-shadow: 0 0 5px white;
-}*/
+  text-shadow: 0 0 5px gray;
+}
 
-/*.sound {
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}*/
+#grid-hear:hover {
+  color: rgb(255, 255, 0);
+  font-size: 150%;
+}
+
+#grid-map {
+  display: grid;
+  height: 100vh;
+  font-size: 2.2rem;
+  background-color: aqua;
+  grid-template-columns:
+    [animation-start] 1fr
+    [animation-end info-start] 1fr
+    [info-end map-start] 2fr 
+    [map-end]
+    ;
+  grid-template-rows: 
+    [up-start] 3fr
+    [up-end down-start] 3fr
+    [down-end]
+    ;
+}
+
+.map-img {
+  background-image: url(/assets/images/USA_Florida_location_map.svg);
+  position: relative;
+  grid-column: map-start / map-end;
+  grid-row: up-start / down-end;
+}
+
+.circle-one {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgb(136, 211, 171, 0.5);
+  position: absolute;
+  top: 20px;
+  
+}
 
